@@ -55,4 +55,26 @@ public class ProductsController : ControllerBase
         await _productService.DeleteProduct(id);
         return Ok(HttpStatusCode.NoContent);
     }
+
+    [HttpGet]
+    [Route("{id}/properties")]
+    public IActionResult GetProperties(int id)
+    {
+        var data = new
+        {
+            Id = id,
+            Name = "Phone",
+            Brand = "Test"
+        };
+
+        return Ok(data);
+    }
+
+    [HttpGet]
+    [Route("{id}/details")]
+    public async Task<IActionResult> GetDetailsAsync(int id)
+    {
+        var product = await _productService.GetProduct(id);
+        return Ok(product);
+    }
 }
